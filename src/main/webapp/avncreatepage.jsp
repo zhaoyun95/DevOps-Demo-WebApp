@@ -112,9 +112,11 @@ Contact     &#160;&#160;&#160;<input type="text" name="contact"><br>
 Date         &#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="text" name="date" placeholder="dd/mm/yyyy"><br>
 Status       &#160;&#160;&#160;&#160; <input type="text" name="status" value="NEW" disabled><br>
 <br>
-<button type="submit" value="Submit">Submit</button>
+<button type="Submit" value="Submit">Submit</button>
 &nbsp;&nbsp;
-<button type="cancel" value="Reset">Cancel</button>
+</form>
+<form action="cancelpage" method="post">
+<button type="Submit" value="Submit" style="position: absolute;left: 728px;top: 405px;">Cancel</button>
 </form>
 </div>
 

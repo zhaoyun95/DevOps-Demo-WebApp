@@ -13,5 +13,17 @@
     <servlet-name>loginpage</servlet-name>
     <url-pattern>/avnlogin</url-pattern>
   </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>avncreatepage.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>cancelpage</servlet-name>
+    <servlet-class>servlet.cancelpage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>cancelpage</servlet-name>
+    <url-pattern>/cancelpage</url-pattern>
+  </servlet-mapping>
  
 </web-app>
