@@ -37,5 +37,17 @@
     <servlet-name>cancelpage</servlet-name>
     <url-pattern>/cancelpage</url-pattern>
   </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>avncreatepage.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>createpage</servlet-name>
+    <servlet-class>servlet.createpage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createpage</servlet-name>
+    <url-pattern>/createpage</url-pattern>
+  </servlet-mapping>
  
 </web-app>

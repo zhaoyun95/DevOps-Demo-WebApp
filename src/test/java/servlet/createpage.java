@@ -4,10 +4,11 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
+import javax.sql.*;
 
-public class viewticket extends HttpServlet {
+public class createpage extends HttpServlet {
 	
-	public void service(HttpServletRequest req,HttpServletResponse res)
+	public void doPost(HttpServletRequest req,HttpServletResponse res)
     throws ServletException, IOException{
 	try{
 		
@@ -22,8 +23,20 @@ public class viewticket extends HttpServlet {
 						
 			Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
 			Statement statement = connection.createStatement();
-			String sql= "SELECT  * FROM avn;";
-			ResultSet rs= statement.executeQuery(sql);
+			
+			String a=req.getParameter("product");
+			String b=req.getParameter("problemdescription");
+			String c=req.getParameter("contact");
+			String d=req.getParameter("date");
+			String e=req.getParameter("status");
+			
+			String sql= "INSERT INTO avn(product, pdesc, cont, datee, statuss ) VALUES ('"+a+"', '"+b+"','"+c+"','"+d+"','"+e+"' ) RETURNING *;";
+			ResultSet rs1= statement.executeQuery(sql);
+			
+			String sql1= "SELECT  * FROM avn;";
+			ResultSet rs= statement.executeQuery(sql1);
+			
+			
 			        out.println("<html>");
 					out.println("<head>");
 					out.println("<title>Repair Page</title>");
@@ -45,7 +58,7 @@ public class viewticket extends HttpServlet {
 					out.println("</div>");
 					out.println("<h2 align="+"center"+">Repair Ticket Page</h2>");
 					out.println("<a href="+"avncreatepage.jsp"+"><input type="+"button"+" class="+"btn"+" value="+"CreateRepairTicket"+"></a>");
-					
+
 					out.println("<div style="+"overflow-x:auto;"+">");
 					out.println("<table>");
 					out.println("<tr>");

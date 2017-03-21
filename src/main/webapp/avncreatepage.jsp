@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>AvnCreatePage</title>
+
 </head>
 <style>
 body { 
@@ -100,23 +101,22 @@ select{
 <div id="section"><br>
 <form action="createpage" method="post">
  
-Ticket No &#160;&#160;<input type="text" name="ticketno"><br>
-Product &#160;&#160;&#160;&#160;&#160;<select>
+Product &#160;&#160;&#160;&#160;&#160;<select name="product">
   <option value="SELECT">--Select--</option>
   <option value="DIGITAL TV">DIGITAL TV</option>
   <option value="BROADBAND">BROADBAND</option>
   <option value="PAYMENT">PAYMENT</option>
   </select><br>
-Prob Descp<input type="textarea" name="problemdescription"><br>
-Contact     &#160;&#160;&#160;<input type="text" name="contact"><br>
-Date         &#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="text" name="date" placeholder="dd/mm/yyyy"><br>
-Status       &#160;&#160;&#160;&#160; <input type="text" name="status" value="NEW" disabled><br>
+Prob Descp&#160;<input type="textarea" name="problemdescription"><br>
+Contact     &#160;&#160;&#160;&#160;&#160;<input type="text" name="contact"><br>
+Date         &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="text"name="date" placeholder="dd/mm/yyyy"><br>
+Status       &#160;&#160;&#160;&#160;&#160;&#160; <input type="text" name="status" value="NEW"><br>
 <br>
 <button type="Submit" value="Submit">Submit</button>
 &nbsp;&nbsp;
 </form>
 <form action="cancelpage" method="post">
-<button type="Submit" value="Submit" style="position: absolute;left: 728px;top: 405px;">Cancel</button>
+<button type="Submit" value="Submit" style="position: absolute;left: 728px;top: 377px;">Cancel</button>
 </form>
 </div>
 

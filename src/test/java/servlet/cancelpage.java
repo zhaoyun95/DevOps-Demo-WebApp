@@ -33,6 +33,7 @@ public class cancelpage extends HttpServlet {
 							out.println("table {border-collapse: collapse;border-spacing: 0;width: 75%;border: 2px solid #ddd;}");
 							out.println("th, td {border: none;text-align: center;padding: 12px;}");
 							out.println(".button {background-color: #FFA500;button-align: center;border-radius:7px;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 14px 2px;cursor: pointer;}");
+							out.println(".btn {background-color: #FFA500;button-align: center;border-radius:7px;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 14px 2px;cursor: pointer;}");
 							out.println("#home{text-align: right;}");
 							out.println("tr:nth-child(even){background-color: #f2f2f2}");
 							out.println("</style>");
@@ -44,17 +45,17 @@ public class cancelpage extends HttpServlet {
 							out.println("<a href="+"avnlogin.jsp"+">Logout</a>");
 							out.println("</div>");
 							out.println("<h2 align="+"center"+">Repair Ticket Page</h2>");
-							out.println("<input type="+"button"+" class="+"button"+" value="+"CreateRepairTicket"+">");
-
+							out.println("<a href="+"avncreatepage.jsp"+"><input type="+"button"+" class="+"btn"+" value="+"CreateRepairTicket"+"></a>");
+												
 							out.println("<div style="+"overflow-x:auto;"+">");
 							out.println("<table>");
 							out.println("<tr>");
-							out.println("<th>Ticket ID</th>");
-							out.println("<th>Products</th>");
-							out.println("<th>Problem Description</th>");
-							out.println("<th>Contact</th>");
-							out.println("<th>Date</th>");
-							out.println("<th>Status</th>");
+							out.println("<th style="+"color: #9a965b;"+">Ticket ID</th>");
+							out.println("<th style="+"color:#9a965b;"+">Products</th>");
+							out.println("<th style="+"color:#9a965b;"+">Problem Description</th>");
+							out.println("<th style="+"color:#9a965b;"+">Contact</th>");
+							out.println("<th style="+"color:#9a965b;"+">Date</th>");
+							out.println("<th style="+"color:#9a965b;"+">Status</th>");
 							out.println("</tr>");
 							while(rs.next())
 							{
