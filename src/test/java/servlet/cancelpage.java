@@ -56,12 +56,12 @@ public class cancelpage extends HttpServlet {
 					out.println("</tr>");
 					while(rs.next())
 					{
-						String tn=rs.getString("Ticket Number");
-						String prod=rs.getString("Product");
-						String pd=rs.getString("Problem Description");
-						String cont=rs.getString("Contact");
-						String date=rs.getString("Date");
-						String stat=rs.getString("Status");
+						String tn=rs.getString("tnum");
+						String prod=rs.getString("product");
+						String pd=rs.getString("pdesc");
+						String cont=rs.getString("cont");
+						String date=rs.getString("datee");
+						String stat=rs.getString("status");
 						out.println("<tr>");
 						out.println("<th>"+tn+"</th>");
 						out.println("<th>"+prod+"</th>");
