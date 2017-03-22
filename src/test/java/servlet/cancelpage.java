@@ -50,7 +50,7 @@ public class cancelpage extends HttpServlet {
 							out.println("<div style="+"overflow-x:auto;"+">");
 							out.println("<table>");
 							out.println("<tr>");
-							out.println("<th style="+"color: #9a965b;"+">Ticket ID</th>");
+							out.println("<th style="+"color:#9a965b;"+">Ticket ID</th>");
 							out.println("<th style="+"color:#9a965b;"+">Products</th>");
 							out.println("<th style="+"color:#9a965b;"+">Problem Description</th>");
 							out.println("<th style="+"color:#9a965b;"+">Contact</th>");

@@ -49,12 +49,12 @@ public class viewticket extends HttpServlet {
 					out.println("<div style="+"overflow-x:auto;"+">");
 					out.println("<table>");
 					out.println("<tr>");
-					out.println("<th style="+"color: #9a965b;"+">Ticket ID</th>");
-					out.println("<th style="+"color: #9a965b;"+">Products</th>");
-					out.println("<th style="+"color: #9a965b;"+">Problem Description</th>");
-					out.println("<th style="+"color: #9a965b;"+">Contact</th>");
-					out.println("<th style="+"color: #9a965b;"+">Date</th>");
-					out.println("<th style="+"color: #9a965b;"+">Status</th>");
+					out.println("<th style="+"color:#9a965b;"+">Ticket ID</th>");
+					out.println("<th style="+"color:#9a965b;"+">Products</th>");
+					out.println("<th style="+"color:#9a965b;"+">Problem Description</th>");
+					out.println("<th style="+"color:#9a965b;"+">Contact</th>");
+					out.println("<th style="+"color:#9a965b;"+">Date</th>");
+					out.println("<th style="+"color:#9a965b;"+">Status</th>");
 					out.println("</tr>");
 					while(rs.next())
 					{
