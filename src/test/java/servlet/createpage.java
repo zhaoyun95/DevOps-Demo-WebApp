@@ -19,7 +19,7 @@ public class createpage extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			String jdbcUrl="jdbc:postgresql://localhost:5432/postgres";
 			String username="postgres";
-			String password="tcs#1234";
+		
 						
 			Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
 			Statement statement = connection.createStatement();
@@ -30,10 +30,10 @@ public class createpage extends HttpServlet {
 			String d=req.getParameter("date");
 			String e=req.getParameter("status");
 			
-			String sql= "INSERT INTO avn(product, pdesc, cont, datee, statuss ) VALUES ('"+a+"', '"+b+"','"+c+"','"+d+"','"+e+"' ) RETURNING *;";
+			String sql= "INSERT INTO avt(product, pdesc, cont, datee, statuss ) VALUES ('"+a+"', '"+b+"','"+c+"','"+d+"','"+e+"' ) RETURNING *;";
 			ResultSet rs1= statement.executeQuery(sql);
 			
-			String sql1= "SELECT  * FROM avn;";
+			String sql1= "SELECT  * FROM avt;";
 			ResultSet rs= statement.executeQuery(sql1);
 			
 			
