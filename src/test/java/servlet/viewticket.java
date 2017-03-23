@@ -18,11 +18,11 @@ public class viewticket extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			String jdbcUrl="jdbc:postgresql://localhost:5432/postgres";
 			String username="postgres";
-			String password="tcs#1234";
+		
 						
 			Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
 			Statement statement = connection.createStatement();
-			String sql= "SELECT  * FROM avn;";
+			String sql= "SELECT  * FROM avt;";
 			ResultSet rs= statement.executeQuery(sql);
 			        out.println("<html>");
 					out.println("<head>");
