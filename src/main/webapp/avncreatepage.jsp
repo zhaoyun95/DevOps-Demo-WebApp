@@ -54,7 +54,7 @@ input[type="text"]{
       -moz-border-radius:5px;
       -webkit-border-radius:5px;
 	  width: 200px;
-      height: 50px;
+      height: 30px;
     }
 input[type="number"]{
       border-radius:5px;
@@ -116,7 +116,7 @@ Status       &#160;&#160;&#160;&#160;&#160;&#160; <input type="text" name="statu
 &nbsp;&nbsp;
 </form>
 <form action="cancelpage" method="post">
-<button type="Submit" value="Submit" style="position: absolute;left: 728px;top: 377px;">Cancel</button>
+<button type="Submit" value="Submit" style="position: absolute;left: 728px;top: 363px;">Cancel</button>
 </form>
 </div>
 
