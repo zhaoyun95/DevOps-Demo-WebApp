@@ -49,7 +49,7 @@ input[type="text"]{
       -moz-border-radius:5px;
       -webkit-border-radius:5px;
     }
-input[type="textarea"]{
+input[type="text"]{
       border-radius:5px;
       -moz-border-radius:5px;
       -webkit-border-radius:5px;
