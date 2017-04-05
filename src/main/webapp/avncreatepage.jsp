@@ -107,7 +107,7 @@ Product &#160;&#160;&#160;&#160;&#160;<select name="product">
   <option value="BROADBAND">BROADBAND</option>
   <option value="PAYMENT">PAYMENT</option>
   </select><br>
-Prob Descp&#160;<input type="textarea" name="problemdescription"><br>
+Prob Descp&#160;<input type="text" name="problemdescription"><br>
 Contact     &#160;&#160;&#160;&#160;&#160;<input type="text" name="contact"><br>
 Date         &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="text"name="date" placeholder="dd/mm/yyyy"><br>
 Status       &#160;&#160;&#160;&#160;&#160;&#160; <input type="text" name="status" value="NEW"><br>
