@@ -12,8 +12,8 @@ public class acat {
 	public HtmlUnitDriver driver;
 	//public WebDriver driver;
 	public WebDriverWait wait;
-	public String URL = "http://ec2-54-254-182-212.ap-southeast-1.compute.amazonaws.com:8080/AVNCommunication-1.0";
-	public String URL1 = "http://ec2-54-254-182-212.ap-southeast-1.compute.amazonaws.com:8080/AVNCommunication-1.0/avncreatepage.jsp";
+	public String URL = "http://ec2-52-221-205-160.ap-southeast-1.compute.amazonaws.com/AVNCommunication-1.0";
+	public String URL1 = "http://ec2-52-221-205-160.ap-southeast-1.compute.amazonaws.com/AVNCommunication-1.0/avncreatepage.jsp";
 	//public String URL = "http://localhost:8080/AVNCommunication-1.0/avnlogin.jsp";
 	//public String URL1 = "http://localhost:8080/AVNCommunication-1.0/avncreatepage.jsp";
 	
