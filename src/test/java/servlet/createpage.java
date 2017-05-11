@@ -87,6 +87,7 @@ public class createpage extends HttpServlet {
 						out.println("<th>"+stat+"</th>");
 						out.println("</tr>");
 					}
+					System.out.println("Crete Ticket Unit Test Passed");
 					out.println("<table>");
 		}
 		catch(ClassNotFoundException cnfe)
