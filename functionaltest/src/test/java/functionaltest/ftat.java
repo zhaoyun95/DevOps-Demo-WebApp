@@ -16,8 +16,8 @@ public class ftat {
 	public HtmlUnitDriver driver;
 	//public WebDriver driver;
 	public WebDriverWait wait;
-	public String URL = "http://ec2-13-228-27-227.ap-southeast-1.compute.amazonaws.com:8080/AVNCommunication-1.0";
-	public String URL1 = "http://ec2-13-228-27-227.ap-southeast-1.compute.amazonaws.com:8080/AVNCommunication-1.0/avncreatepage.jsp";
+	public String URL = "http://13.228.27.227:8080/QAWebapp/";
+	public String URL1 = "http://13.228.27.227:8080/QAWebapp/avncreatepage.jsp";
 	//public String URL = "http://localhost:8080/AVNCommunication-1.0/avnlogin.jsp";
 	//public String URL1 = "http://localhost:8080/AVNCommunication-1.0/avncreatepage.jsp";
 	 
@@ -36,8 +36,8 @@ public class ftat {
 		driver.findElement(By.xpath("//button[text()='Login']")).isDisplayed();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		// Login operation
-		driver.findElement(By.name("username")).sendKeys("deraviyam");
-		driver.findElement(By.name("userpassword")).sendKeys("deraviyam");
+		driver.findElement(By.name("username")).sendKeys("guest");
+		driver.findElement(By.name("userpassword")).sendKeys("guest");
 		driver.findElement(By.xpath("//button[text()='Login']")).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
@@ -102,8 +102,8 @@ public class ftat {
 		driver.findElement(By.partialLinkText("Logout")).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		//driver.findElement(By.xpath("//h1[text()='JUPITER COMMUNICATION']")).isDisplayed();
-		driver.findElement(By.name("username")).sendKeys("deraviyam");
-		driver.findElement(By.name("userpassword")).sendKeys("deraviyam");
+		driver.findElement(By.name("username")).sendKeys("guest");
+		driver.findElement(By.name("userpassword")).sendKeys("guest");
 		driver.findElement(By.xpath("//button[text()='Login']")).click();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.findElement(By.partialLinkText("Logout")).click();
