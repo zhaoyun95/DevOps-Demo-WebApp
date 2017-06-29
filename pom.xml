@@ -57,8 +57,9 @@
 		</dependency>
 	</dependencies>
 	<build>
-		
-		
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>src/test/java/servlet</testSourceDirectory>
+			
 		<plugins>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
