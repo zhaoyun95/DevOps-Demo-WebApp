@@ -11,7 +11,7 @@ public class createpage extends HttpServlet {
 	public void doPost(HttpServletRequest req,HttpServletResponse res)
     throws ServletException, IOException{
 	try{
-		
+		 
 		res.setContentType("text/html");
 		PrintWriter out=res.getWriter();
 		try
