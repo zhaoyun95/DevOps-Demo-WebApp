@@ -22,5 +22,3 @@ INSERT INTO public.avn(statuss) VALUES ('NEW') RETURNING *;
 delete FROM public.avn;
 
 username
-
-Testing polling
