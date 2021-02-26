@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('PrepareSonar') {
+      steps {
+        withSonarQubeEnv(installationName: 'sonarqube', envOnly: true, credentialsId: 'sonar2')
+      }
+    }
+
   }
 }
