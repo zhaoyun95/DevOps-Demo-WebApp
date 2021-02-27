@@ -19,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('Deploy to Test') {
+    stage('Deploy Artifacts') {
       parallel {
         stage('Deploy to Test') {
           steps {
@@ -36,7 +36,7 @@ pipeline {
       }
     }
 
-    stage('UI Test') {
+    stage('Testing') {
       parallel {
         stage('UI Test') {
           steps {
