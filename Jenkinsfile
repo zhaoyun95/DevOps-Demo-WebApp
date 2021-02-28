@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('init') {
       steps {
-        sh 'echo "Hello World!"'
+        sh 'echo "Squad #8 Pipeline"'
       }
     }
 
@@ -62,12 +62,6 @@ pipeline {
     stage('Sanity Test') {
       steps {
         echo 'Sanity Test'
-      }
-    }
-
-    stage('stage10') {
-      steps {
-        echo 'stage 10'
       }
     }
 
