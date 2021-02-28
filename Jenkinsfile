@@ -11,10 +11,12 @@ pipeline {
       steps {
         echo 'Static-Code Analysis'
         withSonarQubeEnv('sonarqube') {
-            withMaven(maven:'Maven3.6.3') {
-                sh 'mvn clean package sonar:sonar'
-            }
+          withMaven(maven: 'Maven3.6.3') {
+            sh 'mvn validate'
+          }
+
         }
+
       }
     }
 
