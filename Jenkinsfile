@@ -12,7 +12,7 @@ pipeline {
         echo 'Static-Code Analysis'
         withSonarQubeEnv(credentialsId: 'sonar2', installationName: 'sonarqube') {
           withMaven(maven: 'Maven3.6.3') {
-            sh 'mvn validate sonar:sonar'
+            sh 'mvn sonar:sonar -Dsonar.login=27500d9c9fdfd54203dd8bea90677a5b0141614e'
           }
 
         }
