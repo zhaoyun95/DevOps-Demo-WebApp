@@ -10,6 +10,7 @@ pipeline {
     stage('Static-Code Analysis') {
       steps {
         echo 'Static-Code Analysis'
+        withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar2')
       }
     }
 
