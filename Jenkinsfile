@@ -24,6 +24,10 @@ pipeline {
     stage('Build Web App') {
       steps {
         echo 'Build Web App'
+        withMaven(maven: 'Maven3.6.3') {
+          sh 'mvn compile'
+        }
+
       }
     }
 
