@@ -10,7 +10,7 @@ pipeline {
     stage('Static-Code Analysis') {
       steps {
         echo 'Static-Code Analysis'
-        withSonarQubeEnv('sonarqube') {
+        withSonarQubeEnv(credentialsId: 'sonar2', installationName: 'sonarqube') {
           withMaven(maven: 'Maven3.6.3') {
             sh 'mvn validate'
           }
