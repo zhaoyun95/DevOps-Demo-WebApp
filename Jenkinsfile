@@ -10,7 +10,9 @@ pipeline {
     stage('Static-Code Analysis') {
       steps {
         echo 'Static-Code Analysis'
-        withSonarQubeEnv 'sonarqube'
+        withSonarQubeEnv(credentialsId: 'sonar2') {
+        // some block
+        }
       }
     }
 
