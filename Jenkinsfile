@@ -3,6 +3,7 @@ pipeline {
   
   environment {
     SONAR_CREDS = credentials('sonar-user-pass')
+    SONAR_TOKEN = credentials('sonar-token')
   }
 
   stages {
@@ -17,7 +18,8 @@ pipeline {
         echo 'Static-Code Analysis'
         withSonarQubeEnv(credentialsId: 'sonar2', installationName: 'sonarqube') {
           withMaven(maven: 'Maven3.6.3') {
-            sh "mvn sonar:sonar -Dsonar.login=$SONAR_CREDS_USR -Dsonar.password=$SONAR_CREDS_PSW -Dsonar.sources=. -Dsonar.tests=. -Dsonar.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.test.exclusions=**/test/java/servlet/createpage_junit.java"
+            //sh "mvn sonar:sonar -Dsonar.login=$SONAR_CREDS_USR -Dsonar.password=$SONAR_CREDS_PSW -Dsonar.sources=. -Dsonar.tests=. -Dsonar.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.test.exclusions=**/test/java/servlet/createpage_junit.java"
+            sh "mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.sources=. -Dsonar.tests=. -Dsonar.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.test.exclusions=**/test/java/servlet/createpage_junit.java"
             sh "mvn validate"
           }
 
