@@ -33,7 +33,6 @@ pipeline {
         withMaven(maven: 'Maven3.6.3') {
           sh 'mvn compile'
         }
-
       }
     }
 
