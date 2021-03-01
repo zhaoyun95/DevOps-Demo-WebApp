@@ -1,6 +1,10 @@
 pipeline {
   agent any
   
+  tools {
+    maven 'Maven3.6.3'
+  }
+
   environment {
     SONAR_CREDS = credentials('sonar-user-pass')
   }
@@ -16,11 +20,8 @@ pipeline {
       steps {
         echo 'Static-Code Analysis'
         withSonarQubeEnv(credentialsId: 'sonar2', installationName: 'sonarqube') {
-          withMaven(maven: 'Maven3.6.3') {
             sh "mvn sonar:sonar -Dsonar.login=$SONAR_CREDS_USR -Dsonar.password=$SONAR_CREDS_PSW -Dsonar.sources=. -Dsonar.tests=. -Dsonar.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.test.exclusions=**/test/java/servlet/createpage_junit.java"
             sh "mvn validate"
-          }
-
         }
 
       }
@@ -36,51 +37,69 @@ pipeline {
       }
     }
 
-    stage('Deploy Artifacts') {
-      parallel {
-        stage('Deploy to Test') {
-          steps {
-            echo 'Deploy to Test'
-          }
-        }
-
-        stage('Store Artifacts') {
-          steps {
-            echo 'Store Artifacts'
-          }
-        }
-
-      }
-    }
-
-    stage('Testing') {
-      parallel {
-        stage('UI Test') {
-          steps {
-            echo 'UI Test'
-          }
-        }
-
-        stage('Performance Test') {
-          steps {
-            echo 'Performance Test'
-          }
-        }
-
-      }
-    }
-
-    stage('Deploy to Prod') {
+    stage('Upload-to-Artifactory') {
       steps {
-        echo 'Deploy to Prod'
-      }
+
+        rtUpload(
+          serverId: 'artifactory',
+          spec: """{
+          "files": [{
+            "pattern": "target/*.war",
+            "target": "libs-release-local"
+          }]
+        }
+        """
+      )
+
+      rtPublishBuildInfo(
+        serverId: 'artifactory'
+      )
+    }
+  }
+
+  stage('Deploy-to-QA') {
+    steps {
+      deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.87.233:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
     }
 
-    stage('Sanity Test') {
-      steps {
-        echo 'Sanity Test'
-      }
+  }
+
+  stage('Slack-Notification') {
+    steps {
+      slackSend channel: 'alerts', message: "Deployed to QA: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
     }
+  }
+
+  stage('UI-Test') {
+    steps {
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
+    }
+  }
+
+  stage('Performance-Test') {
+    steps {
+      sh 'echo "Squad #8 Pipeline performance test"'
+    }
+  }
+
+  stage('Deploy-to-PROD') {
+    steps {
+      deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.92.140:8080/')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
+    }
+
+  }
+
+  stage('Slack-Notification-Prod') {
+    steps {
+      slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+    }
+  }
+
+  stage('Sanity-Test') {
+    steps {
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'SanityTestReport', reportTitles: ''])
+    }
+  }
 
   }
 }
