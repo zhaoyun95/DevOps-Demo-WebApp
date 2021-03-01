@@ -77,13 +77,20 @@ pipeline {
   }
 
   stage('Testing') {
-    steps {
-      echo 'UI-Test'
-      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
-    }
-    steps {
-      echo "Performance test"
-      blazeMeterTest credentialsId: 'blazeMeter', testId: '9015188.taurus', workspaceId: '755418'
+    parallel {
+      stage('UI Test') {
+        steps {
+          echo 'UI Test'
+          publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
+        }
+      }
+
+      stage('Performance Test') {
+        steps {
+          echo "Performance Test"
+          blazeMeterTest credentialsId: 'blazeMeter', testId: '9015188.taurus', workspaceId: '755418'
+        }
+      }
     }
   }
 
