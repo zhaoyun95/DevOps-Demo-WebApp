@@ -36,6 +36,13 @@ pipeline {
       }
     }
 
+    stage('Build Artifact') {
+      steps {
+        sh 'mvn clean install -f pom.xml'
+      }
+
+    }
+
     stage('Upload-to-Artifactory') {
       steps {
 
