@@ -98,7 +98,7 @@ pipeline {
 
   stage('Slack-Notification-Prod') {
     steps {
-      slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+      slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
     }
   }
 
