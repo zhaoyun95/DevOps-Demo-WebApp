@@ -70,7 +70,7 @@ pipeline {
 
   }
 
-  stage('Slack-Notification') {
+  stage('Slack-Notification-QA') {
     steps {
       slackSend channel: 'alerts', message: "Deployed to QA: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
     }
