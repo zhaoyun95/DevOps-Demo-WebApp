@@ -1,12 +1,11 @@
 pipeline {
   agent any
-  
-  tools {
-    maven 'Maven3.6.3'
-  }
 
   environment {
-    SONAR_CREDS = credentials('sonar-user-pass')
+    imagename = "wolfen/devops"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+
   }
 
   stages {
@@ -16,10 +15,36 @@ pipeline {
       }
     }
 
-    stage('Build docker image and publish'){
+    stage('Package war file'){
       steps {
-        echo "build docker image"
-        
+        echo "package war file"
+        sh 'mvn package'
+      }
+    }
+
+    stage('Build image') {
+      steps {
+        script {
+          dockerImage = docker.build imagename
+        }
+      }
+    }
+
+    stage('Push image') {
+      steps {
+        script {
+          docker.withRegistry('',registryCredential) {
+            dockerImage.push("${env.BUILD_NUMBER}")
+            dockerImage.push('latest')
+          }
+        }
+      }
+    }
+
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $imagename:$BUILD_NUMBER"
+        sh "docker rmi $imagename:latest"
       }
     }
 
