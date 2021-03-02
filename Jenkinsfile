@@ -79,11 +79,11 @@ pipeline {
   stage('Testing') {
     steps {
       parallel(
-        UI-Test: {
+        UITest: {
           echo "UI Test"
           publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
         },
-        Performance-Test: {
+        PerformanceTest: {
           echo "Performance test"
           blazeMeterTest credentialsId: 'blazeMeter', testId: ' 9015188.taurus', workspaceId: '755418'
         }
