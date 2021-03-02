@@ -80,7 +80,7 @@ pipeline {
           UITest: {
             echo "UI Test"
             sh 'mvn test -f functionaltest/pom.xml'
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
+            publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: 'UI Test Report'])
           },
           PerformanceTest: {
             echo "Performance test"
@@ -107,7 +107,7 @@ pipeline {
       steps {
         echo "Sanity-Test"
         sh 'mvn test -f Acceptancetest/pom.xml'
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'SanityTestReport', reportTitles: ''])
+        publishHTML(target: [allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'SanityTestReport', reportTitles: 'Sanity Test Report'])
       }
     }
 
