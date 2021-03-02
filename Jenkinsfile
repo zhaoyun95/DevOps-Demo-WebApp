@@ -15,5 +15,5 @@ pipeline {
         sh 'echo "k8s-pipeline"'
       }
     }
-  } // end stages
+  }
 }
