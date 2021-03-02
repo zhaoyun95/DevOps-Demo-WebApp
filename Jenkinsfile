@@ -101,7 +101,6 @@ pipeline {
       steps {
         slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
       }
-      }
     }
 
     stage('Sanity-Test') {
