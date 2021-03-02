@@ -91,10 +91,6 @@ pipeline {
     }
   }
 
-  stage('Performance-Test') {
-
-  }
-
   stage('Deploy-to-PROD') {
     steps {
       deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.92.140:8080/')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
