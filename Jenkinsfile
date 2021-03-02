@@ -12,8 +12,17 @@ pipeline {
   stages {
     stage('init') {
       steps {
-        sh 'echo "k8s-pipeline"'
+        echo "k8s-pipeline"
       }
     }
+
+    stage('Build docker image and publish'){
+      steps {
+        echo "build docker image"
+        
+      }
+    }
+
+
   }
 }
