@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('init') {
       steps {
-        sh 'echo "Squad #8 Pipeline"'
+        echo "Squad #8 Pipeline"
       }
     }
 
@@ -30,9 +30,7 @@ pipeline {
     stage('Build Web App') {
       steps {
         echo 'Build Web App'
-        withMaven(maven: 'Maven3.6.3') {
-          sh 'mvn compile'
-        }
+        sh 'mvn compile'
       }
     }
 
@@ -101,7 +99,8 @@ pipeline {
 
   stage('Slack-Notification-Prod') {
     steps {
-      slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+      slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+    }
     }
   }
 
