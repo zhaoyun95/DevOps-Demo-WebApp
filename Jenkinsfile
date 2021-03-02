@@ -107,6 +107,8 @@ pipeline {
 
   stage('Sanity-Test') {
     steps {
+      echo "Sanity-Test"
+      sh 'mvn test -f Acceptancetest/pom.xml'
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'SanityTestReport', reportTitles: ''])
     }
   }
