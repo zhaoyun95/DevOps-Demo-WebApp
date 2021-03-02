@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('init') {
       steps {
-        echo "Squad #8 Pipeline"
+        sh 'echo "Squad #8 Pipeline"'
       }
     }
 
@@ -45,6 +45,7 @@ pipeline {
 
     stage('Upload-to-Artifactory') {
       steps {
+
         rtUpload(
           serverId: 'artifactory',
           spec: """{
@@ -60,56 +61,52 @@ pipeline {
         serverId: 'artifactory'
       )
     }
+  }
 
-    stage('Deploy-to-QA') {
-      steps {
-        deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.87.233:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
-      }
-
+  stage('Deploy-to-QA') {
+    steps {
+      deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.87.233:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
     }
 
-    stage('Slack-Notification-QA') {
-      steps {
-        slackSend channel: 'alerts', message: "Deployed to QA: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-      }
+  }
+
+  stage('Slack-Notification') {
+    steps {
+      slackSend channel: 'alerts', message: "Deployed to QA: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+    }
+  }
+
+  stage('UI-Test') {
+    steps {
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
+    }
+  }
+
+  stage('Performance-Test') {
+    steps {
+      sh 'echo "Squad #8 Pipeline performance test"'
+      blazeMeterTest credentialsId: 'blazeMeter', testId: ' 9015188.taurus', workspaceId: '755418'
+    }
+  }
+
+  stage('Deploy-to-PROD') {
+    steps {
+      deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.92.140:8080/')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
     }
 
-    stage('Testing') {
-      parallel {
-        stage('UI Test') {
-          steps {
-            echo 'UI Test'
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
-          }
-        }
+  }
 
-        stage('Performance Test') {
-          steps {
-            echo "Performance Test"
-            blazeMeterTest credentialsId: 'blazeMeter', testId: '9015188.taurus', workspaceId: '755418'
-          }
-        }
-      }
+  stage('Slack-Notification-Prod') {
+    steps {
+      slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
     }
+  }
 
-    stage('Deploy-to-PROD') {
-      steps {
-        deploy adapters: [tomcat8(credentialsId: 'tomcat', path: '', url: 'http://172.31.92.140:8080/')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
-      }
-
+  stage('Sanity-Test') {
+    steps {
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'SanityTestReport', reportTitles: ''])
     }
-
-    stage('Slack-Notification-Prod') {
-      steps {
-        slackSend channel: 'alerts', message: "Deployed to PROD: Job - '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-      }
-    }
-
-    stage('Sanity-Test') {
-      steps {
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'SanityTestReport', reportTitles: ''])
-      }
-    }
+  }
 
   }
 }
