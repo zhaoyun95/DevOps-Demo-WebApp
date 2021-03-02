@@ -76,17 +76,23 @@ pipeline {
     }
   }
 
-  stage('UI-Test') {
+  stage('Testing') {
     steps {
-      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
+      parallel(
+        a: {
+          echo "UI Test"
+          publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
+        },
+        b: {
+          echo "Performance test"
+          blazeMeterTest credentialsId: 'blazeMeter', testId: ' 9015188.taurus', workspaceId: '755418'
+        }
+      )
     }
   }
 
   stage('Performance-Test') {
-    steps {
-      sh 'echo "Squad #8 Pipeline performance test"'
-      blazeMeterTest credentialsId: 'blazeMeter', testId: ' 9015188.taurus', workspaceId: '755418'
-    }
+
   }
 
   stage('Deploy-to-PROD') {
