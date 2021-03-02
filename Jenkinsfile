@@ -1,24 +1,16 @@
 pipeline {
   agent any
-
-  environment {
-    imagename = "wolfen/devops"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-
-  }
-
   stages {
     stage('init') {
       steps {
-        echo "k8s-pipeline"
+        echo 'k8s-pipeline'
       }
     }
 
-    stage('Package war file'){
+    stage('Package war file') {
       steps {
-        echo "package war file"
-        sh 'mvn package'
+        echo 'package war file'
+        sh 'mvn clean package'
       }
     }
 
@@ -27,6 +19,7 @@ pipeline {
         script {
           dockerImage = docker.build imagename
         }
+
       }
     }
 
@@ -38,16 +31,21 @@ pipeline {
             dockerImage.push('latest')
           }
         }
+
       }
     }
 
     stage('Remove Unused docker image') {
-      steps{
+      steps {
         sh "docker rmi $imagename:$BUILD_NUMBER"
         sh "docker rmi $imagename:latest"
       }
     }
 
-
+  }
+  environment {
+    imagename = 'wolfen/devops'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
 }
