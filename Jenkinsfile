@@ -23,7 +23,12 @@ pipeline {
             sh "mvn sonar:sonar -Dsonar.login=$SONAR_CREDS_USR -Dsonar.password=$SONAR_CREDS_PSW -Dsonar.sources=. -Dsonar.tests=. -Dsonar.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.test.exclusions=**/test/java/servlet/createpage_junit.java"
             sh "mvn validate"
         }
-
+        timeout(time: 1, unit: 'HOURS') { // pipeline will be terminated if a timeout occurs
+	        def qg = waitForQualityGate() // Reuse taskId  collected by withSonarQubeEnv
+          if (qg.status != 'OK') {
+            error "Pipeline aborted.Quality gate failure: ${qg.status}"
+          }
+	      }
       }
     }
 
