@@ -26,6 +26,16 @@ pipeline {
       }
     }
 
+    stage("Quality Gate"){
+          timeout(time: 3, unit: 'MINUTES') {
+              def qg = waitForQualityGate()
+              if (qg.status != 'OK') {
+                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
+          }
+    }
+
+
     stage('Build Web App') {
       steps {
         echo 'Build Web App'
