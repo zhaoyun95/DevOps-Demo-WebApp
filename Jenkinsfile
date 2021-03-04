@@ -1,12 +1,5 @@
 pipeline {
   agent any
-  
-  environment {
-    imagename = 'wolfen/devops'
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
-  
   stages {
     stage('init') {
       steps {
@@ -49,6 +42,16 @@ pipeline {
       }
     }
 
-  }
+    stage('') {
+      steps {
+        sh 'kubectl apply -f deployment'
+      }
+    }
 
+  }
+  environment {
+    imagename = 'wolfen/devops'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
 }
