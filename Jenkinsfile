@@ -44,9 +44,9 @@ pipeline {
 */
     stage('Deploy to EKS') {
       steps {
-        id
-        pwd
-        ll
+        sh 'id'
+        sh 'pwd'
+        sh 'ls -la'
         sh 'kubectl apply -f deployment.yaml'
       }
     }
