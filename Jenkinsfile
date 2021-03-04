@@ -23,6 +23,7 @@ pipeline {
             sh "mvn clean package"
             sh "mvn sonar:sonar -Dsonar.login=$SONAR_CREDS_USR -Dsonar.password=$SONAR_CREDS_PSW -Dsonar.sources=. -Dsonar.tests=. -Dsonar.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.test.exclusions=**/test/java/servlet/createpage_junit.java"
             sh "mvn validate"
+            sh 'sleep 30'
         }
       }
     }
