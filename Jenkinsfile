@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  stages {
+  stages {/*
     stage('init') {
       steps {
         echo 'k8s-pipeline'
@@ -41,10 +41,10 @@ pipeline {
         sh "docker rmi $imagename:latest"
       }
     }
-
-    stage('') {
+*/
+    stage('Deploy to EKS') {
       steps {
-        sh 'kubectl apply -f deployment'
+        sh 'kubectl apply -f deployment.yaml'
       }
     }
 
