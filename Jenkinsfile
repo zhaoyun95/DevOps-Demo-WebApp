@@ -1,12 +1,5 @@
 pipeline {
   agent any
-
-  environment {
-    imagename = 'wolfen/devops'
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
-
   stages {
     stage('init') {
       steps {
@@ -55,6 +48,16 @@ pipeline {
       }
     }
 
-  }
+    stage('Wait 30 seconds') {
+      steps {
+        sleep 30
+      }
+    }
 
+  }
+  environment {
+    imagename = 'wolfen/devops'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
 }
