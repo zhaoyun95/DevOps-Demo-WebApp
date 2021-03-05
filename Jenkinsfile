@@ -1,6 +1,13 @@
 pipeline {
   agent any
-  stages {/*
+
+  environment {
+    imagename = 'wolfen/devops'
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+
+  stages {
     stage('init') {
       steps {
         echo 'k8s-pipeline'
@@ -41,20 +48,13 @@ pipeline {
         sh "docker rmi $imagename:latest"
       }
     }
-*/
+
     stage('Deploy to EKS') {
       steps {
-        sh 'id'
-        sh 'pwd'
-        sh 'ls -la'
         sh 'kubectl apply -f deployment.yaml'
       }
     }
 
   }
-  environment {
-    imagename = 'wolfen/devops'
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
+
 }
