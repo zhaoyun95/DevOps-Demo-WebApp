@@ -54,6 +54,12 @@ pipeline {
       }
     }
 
+    stage('Check Service Link') {
+      steps {
+        sh 'kubectl get all -A'
+      }
+    }
+
   }
   environment {
     imagename = 'wolfen/devops'
