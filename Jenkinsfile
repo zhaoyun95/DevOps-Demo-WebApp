@@ -93,7 +93,7 @@ pipeline {
           },
           PerformanceTest: {
             echo "Performance test"
-            //blazeMeterTest credentialsId: 'blazeMeter', testId: ' 9015188.taurus', workspaceId: '755418'
+            blazeMeterTest credentialsId: 'blazeMeter', testId: ' 9015188.taurus', workspaceId: '755418'
           }
         )
       }
