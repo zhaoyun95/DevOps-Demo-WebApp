@@ -1,67 +1,27 @@
 pipeline {
   agent any
 
-  environment {
-    imagename = 'wolfen/devops'
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
-  
   stages {
     stage('init') {
       steps {
-        echo 'k8s-pipeline'
+        echo 'k8s-stop'
       }
     }
 
-    stage('Package war file') {
+
+    stage('Delete deployment') {
       steps {
-        echo 'package war file'
-        sh 'mvn clean package -Dmaven.test.skip=true'
+        sh 'kubectl delete -f deployment.yaml'
       }
     }
 
-    stage('Build image') {
+    stage('Wait 5 seconds') {
       steps {
-        script {
-          dockerImage = docker.build imagename
-        }
-
+        sleep 5
       }
     }
 
-    stage('Push image') {
-      steps {
-        script {
-          docker.withRegistry('',registryCredential) {
-            dockerImage.push("${env.BUILD_NUMBER}")
-            dockerImage.push('latest')
-          }
-        }
-
-      }
-    }
-
-    stage('Remove Unused docker image') {
-      steps {
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-        sh "docker rmi $imagename:latest"
-      }
-    }
-
-    stage('Deploy to EKS') {
-      steps {
-        sh 'kubectl apply -f deployment.yaml'
-      }
-    }
-
-    stage('Wait 30 seconds') {
-      steps {
-        sleep 30
-      }
-    }
-
-    stage('Check Service Link') {
+    stage('Check Kubernete Status') {
       steps {
         sh 'kubectl get all -A'
       }
